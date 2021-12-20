@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:movii/screens/homepage.dart';
 
 void main() {
   runApp(
-    MaterialApp(
+    GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       home: HomePage(),
     )
   );
