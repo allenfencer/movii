@@ -7,17 +7,21 @@ class CustomIcon extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(5),
-      height: 60,
-      width: 60,
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(15), color: color),
-      child: Center(
-        child: Icon(
-          icon,
-          color: Colors.white,
-          size: 35,
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        clipBehavior: Clip.antiAlias,
+        padding: EdgeInsets.all(5),
+        height: 60,
+        width: 60,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15), color: color),
+        child: Center(
+          child: Icon(
+            icon,
+            color: Colors.white,
+            size: 35,
+          ),
         ),
       ),
     );

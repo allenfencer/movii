@@ -3,8 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:movii/components/icon_row.dart';
 import 'package:movii/global_widgets/custom_button.dart';
+import 'package:movii/global_widgets/custom_card.dart';
 import 'package:movii/global_widgets/custom_icon.dart';
 import 'package:movii/global_widgets/custom_title_text.dart';
+import 'package:movii/global_widgets/rating_star.dart';
 import 'package:movii/global_widgets/small_text.dart';
 
 class HomePage extends StatelessWidget {
@@ -53,6 +55,18 @@ class HomePage extends StatelessWidget {
               ],
             ),
             IconRow(),
+            CustomCard(
+              rating: 8.6,
+              h1: 'IMDb',
+              t1: '8.2',
+              h2: 'Poster',
+              t2: '8.4',
+              h3: 'Cinema',
+              t3: '8.8',
+              h4: 'Search',
+              t4: '',
+            ),
+            RatingStar(),
           ],
         ),
       ),
