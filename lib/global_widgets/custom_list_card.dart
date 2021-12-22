@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomCard extends StatefulWidget {
+class CustomListCard extends StatelessWidget {
   final double rating;
   final Icon? l1;
   final Icon? l2;
@@ -18,7 +17,7 @@ class CustomCard extends StatefulWidget {
   final String? t4;
   final Widget? ratingbar;
 
-  const CustomCard(
+  const CustomListCard(
       {Key? key,
       required this.rating,
       this.ratingbar,
@@ -37,15 +36,10 @@ class CustomCard extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<CustomCard> createState() => _CustomCardState();
-}
-
-class _CustomCardState extends State<CustomCard> {
-  @override
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.antiAlias,
-      margin: EdgeInsets.only(left: 18, top: 25, right: 18),
+      margin: EdgeInsets.symmetric(horizontal: 18, vertical: 15),
       padding: EdgeInsets.all(8),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
@@ -55,22 +49,13 @@ class _CustomCardState extends State<CustomCard> {
       child: Column(
         children: [
           ListTile(
-            title: RatingBar.builder(
-              initialRating: widget.rating / 2,
-              minRating: 1,
-              direction: Axis.horizontal,
-              allowHalfRating: true,
-              itemSize: 28,
-              itemCount: 5,
-              itemBuilder: (context, _) => Icon(
-                Icons.star,
-                color: Colors.amber,
-              ),
-              updateOnDrag: false,
-              onRatingUpdate: (rate) {},
+            leading: l1,
+            title: Text(
+              h1,
+              style: GoogleFonts.poppins(fontSize: 20, color: Colors.grey),
             ),
             trailing: Text(
-              widget.rating.toString(),
+              t1,
               style: GoogleFonts.poppins(
                   fontSize: 20,
                   color: Colors.white,
@@ -78,13 +63,13 @@ class _CustomCardState extends State<CustomCard> {
             ),
           ),
           ListTile(
-            leading: widget.l1,
+            leading: l2,
             title: Text(
-              widget.h1,
+              h2,
               style: GoogleFonts.poppins(fontSize: 20, color: Colors.grey),
             ),
             trailing: Text(
-              widget.t1,
+              t2,
               style: GoogleFonts.poppins(
                   fontSize: 20,
                   color: Colors.white,
@@ -92,13 +77,13 @@ class _CustomCardState extends State<CustomCard> {
             ),
           ),
           ListTile(
-            leading: widget.l2,
+            leading: l3,
             title: Text(
-              widget.h2,
+              h3,
               style: GoogleFonts.poppins(fontSize: 20, color: Colors.grey),
             ),
             trailing: Text(
-              widget.t2,
+              t3,
               style: GoogleFonts.poppins(
                   fontSize: 20,
                   color: Colors.white,
@@ -106,27 +91,13 @@ class _CustomCardState extends State<CustomCard> {
             ),
           ),
           ListTile(
-            leading: widget.l3,
+            leading: l4,
             title: Text(
-              widget.h3,
+              h4.toString(),
               style: GoogleFonts.poppins(fontSize: 20, color: Colors.grey),
             ),
             trailing: Text(
-              widget.t3,
-              style: GoogleFonts.poppins(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-          ListTile(
-            leading: widget.l4,
-            title: Text(
-              widget.h4.toString(),
-              style: GoogleFonts.poppins(fontSize: 20, color: Colors.grey),
-            ),
-            trailing: Text(
-              widget.t4.toString(),
+              t4.toString(),
               style: GoogleFonts.poppins(
                   fontSize: 20,
                   color: Colors.white,

@@ -1,11 +1,13 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movii/components/icon_row.dart';
 import 'package:movii/global_widgets/custom_button.dart';
 import 'package:movii/global_widgets/custom_card.dart';
 import 'package:movii/global_widgets/custom_icon.dart';
+import 'package:movii/global_widgets/custom_list_card.dart';
 import 'package:movii/global_widgets/custom_title_text.dart';
+import 'package:movii/global_widgets/movie_card.dart';
 import 'package:movii/global_widgets/rating_star.dart';
 import 'package:movii/global_widgets/small_text.dart';
 
@@ -20,6 +22,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Color(0xff17082A),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
               children: [
@@ -38,9 +41,15 @@ class HomePage extends StatelessWidget {
                     child: CustomIcon(
                         icon: Icons.play_arrow_rounded,
                         color: Colors.white.withOpacity(0.2))),
-                Positioned(left: 40, top: height * 0.4, child: TitleText()),
                 Positioned(
                     left: 40,
+                    top: height * 0.38,
+                    child: TitleText(
+                      title1: 'Title',
+                      title2: 'Goes Here',
+                    )),
+                Positioned(
+                    left: 45,
                     top: height * 0.55,
                     child: SmallText(
                       text: 'Drama, Music',
@@ -66,7 +75,47 @@ class HomePage extends StatelessWidget {
               h4: 'Search',
               t4: '',
             ),
+            CustomListCard(
+              l1: Icon(
+                FontAwesomeIcons.calendar,
+                color: Color(0xffF79E44),
+                size: 30,
+              ),
+              l2: Icon(
+                FontAwesomeIcons.globeAmericas,
+                color: Color(0xffF79E44),
+                size: 30,
+              ),
+              l3: Icon(
+                FontAwesomeIcons.clock,
+                color: Color(0xffF79E44),
+                size: 30,
+              ),
+              l4: Icon(
+                FontAwesomeIcons.volumeUp,
+                color: Color(0xffF79E44),
+                size: 30,
+              ),
+              rating: 8.6,
+              h1: '2018',
+              t1: '',
+              h2: 'USA',
+              t2: '',
+              h3: '125 MNH',
+              t3: '',
+              h4: 'Rus | En',
+              t4: '',
+            ),
             RatingStar(),
+            Padding(
+              padding: const EdgeInsets.only(top: 28.0, left: 20),
+              child: Text('Similar Movies',
+                  style: GoogleFonts.poppins(
+                      fontSize: 26,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700)),
+            ),
+            MovieCard(),
           ],
         ),
       ),

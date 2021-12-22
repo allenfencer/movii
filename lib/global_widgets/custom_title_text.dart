@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TitleText extends StatelessWidget {
-  const TitleText({Key? key}) : super(key: key);
+  final String? title1;
+  final String? title2;
+  final double? fontSize;
+  const TitleText({Key? key, this.fontSize, this.title1, this.title2})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,21 +16,21 @@ class TitleText extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Title',
+            '$title1\n$title2',
             style: GoogleFonts.poppins(
-                fontSize: 40,
+                fontSize: fontSize ?? 40,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 0.9),
           ),
-          Text(
-            'Goes Here',
-            style: GoogleFonts.poppins(
-                fontSize: 40,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 0.9),
-          ),
+          // Text(
+          //   title2.toString(),
+          //   style: GoogleFonts.poppins(
+          //       fontSize: fontSize ?? 40,
+          //       color: Colors.white,
+          //       fontWeight: FontWeight.bold,
+          //       letterSpacing: 0.9),
+          // ),
         ],
       ),
     );
