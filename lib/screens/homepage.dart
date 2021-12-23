@@ -111,7 +111,7 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.only(top: 28.0, left: 20),
               child: Text('Similar Movies',
                   style: GoogleFonts.poppins(
-                      fontSize: 26,
+                      fontSize: 24,
                       color: Colors.white,
                       fontWeight: FontWeight.w700)),
             ),

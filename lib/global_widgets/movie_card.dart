@@ -16,29 +16,31 @@ class MovieCard extends StatelessWidget {
         scrollDirection: Axis.vertical,
         itemBuilder: (BuildContext context, index) {
           return Container(
-            color: Colors.white,
-            margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-            height: 280,
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            height: 260,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
-                  height: 200,
+                  height: 180,
                   width: MediaQuery.of(context).size.width,
                   clipBehavior: Clip.antiAlias,
                   decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(25)),
-                  child: Image.asset(Movie.movieList[index].imgLoc),
+                      BoxDecoration(borderRadius: BorderRadius.circular(18)),
+                  child: Image.asset(
+                    Movie.movieList[index].imgLoc,
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: Text(
                     Movie.movieList[index].movieName,
                     style: GoogleFonts.poppins(
-                        fontSize: 26,
+                        fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                        color: Colors.white),
                   ),
                 ),
                 Padding(
@@ -48,7 +50,7 @@ class MovieCard extends StatelessWidget {
                     minRating: 1,
                     direction: Axis.horizontal,
                     allowHalfRating: true,
-                    itemSize: 24,
+                    itemSize: 22,
                     itemCount: 5,
                     itemBuilder: (context, _) => Icon(
                       Icons.star,
