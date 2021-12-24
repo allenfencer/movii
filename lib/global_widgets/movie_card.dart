@@ -38,16 +38,18 @@ class MovieCard extends StatelessWidget {
                   child: Text(
                     Movie.movieList[index].movieName,
                     style: GoogleFonts.poppins(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
                         color: Colors.white),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 18.0, bottom: 5),
                   child: RatingBar.builder(
-                    initialRating: Movie.movieList[index].rating / 2,
+                    initialRating:
+                        (Movie.movieList[index].rating.floorToDouble()) / 2,
                     minRating: 1,
+                    ignoreGestures: true,
                     direction: Axis.horizontal,
                     allowHalfRating: true,
                     itemSize: 22,

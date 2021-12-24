@@ -18,7 +18,7 @@ class TitleText extends StatelessWidget {
           Text(
             '$title1\n$title2',
             style: GoogleFonts.poppins(
-                fontSize: fontSize ?? 40,
+                fontSize: fontSize ?? 38,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 0.9),

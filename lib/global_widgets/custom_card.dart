@@ -58,6 +58,7 @@ class _CustomCardState extends State<CustomCard> {
             title: RatingBar.builder(
               initialRating: widget.rating / 2,
               minRating: 1,
+              ignoreGestures: true,
               direction: Axis.horizontal,
               allowHalfRating: true,
               itemSize: 28,

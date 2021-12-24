@@ -7,15 +7,8 @@ class IconRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.zero,
       padding: EdgeInsets.only(top: 25),
-      decoration:
-          BoxDecoration(color: Colors.black.withOpacity(0.1), boxShadow: [
-        BoxShadow(
-            blurRadius: 45,
-            color: Color(0xff17082A),
-            spreadRadius: 10,
-            offset: Offset(0, -10)),
-      ]),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
