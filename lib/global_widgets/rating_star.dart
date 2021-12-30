@@ -13,7 +13,7 @@ class _RatingStarState extends State<RatingStar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 0, bottom: 10, left: 15, right: 15),
+      margin: EdgeInsets.only(top: 0, bottom: 0, left: 15, right: 15),
       padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
