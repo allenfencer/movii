@@ -30,7 +30,7 @@ class _AppState extends State<App> {
   List<Widget> screenList = [
     InnerScreen(),
     SearchScreen(),
-    SearchScreen()
+    Container()
   ];
 
   @override
