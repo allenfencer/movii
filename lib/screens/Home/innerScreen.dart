@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:movii/global_widgets/customButton.dart';
 import 'package:movii/global_widgets/custom_button.dart';
 
+import 'Components/movieTileProgress.dart';
+import 'Components/movieTileRegular.dart';
+
 class InnerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -13,6 +16,7 @@ class InnerScreen extends StatelessWidget {
           color: Color(0xFF17082A),
           child: SingleChildScrollView(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Stack(
                   children: [
@@ -86,76 +90,12 @@ class InnerScreen extends StatelessWidget {
                     ),
                   ]
                 ), //Top Area
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0, top: 16.0),
-                      child: Text('Continue watching for Elon', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
-                    ),
-                    SizedBox(height: 20,),
-                    SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          SizedBox(width: 16,),
-                          InProcessCard(),
-                          Container(
-                              margin: EdgeInsets.all(5),
-                              height: 180, width: 120,
-                              child: Image.asset('assets/images/bg.png', fit: BoxFit.cover,)
-                          ),
-                          Container(
-                              margin: EdgeInsets.all(5),
-                              height: 180, width: 120,
-                              child: Image.asset('assets/images/bg.png', fit: BoxFit.cover,)
-                          ),
-                          Container(
-                              margin: EdgeInsets.all(5),
-                              height: 180, width: 120,
-                              child: Image.asset('assets/images/bg.png', fit: BoxFit.cover,)
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0, top: 16.0),
-                      child: Text('Continue watching for Elon', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
-                    ),
-                    SizedBox(height: 20,),
-                    SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          SizedBox(width: 16,),
-                          InProcessCard(),
-                          Container(
-                              margin: EdgeInsets.all(5),
-                              height: 180, width: 120,
-                              child: Image.asset('assets/images/bg.png', fit: BoxFit.cover,)
-                          ),
-                          Container(
-                              margin: EdgeInsets.all(5),
-                              height: 180, width: 120,
-                              child: Image.asset('assets/images/bg.png', fit: BoxFit.cover,)
-                          ),
-                          Container(
-                              margin: EdgeInsets.all(5),
-                              height: 180, width: 120,
-                              child: Image.asset('assets/images/bg.png', fit: BoxFit.cover,)
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                MovieRow(title: 'Continue watching for Elon', progress: true,),
+                MovieRow(title: 'My List',),
+                MovieRow(title: 'Europe Movie',),
+                MovieRow(title: 'Romance/Drama',),
+                MovieRow(title: 'Action/Thriller',),
+
 
               ],
             ),
@@ -165,58 +105,64 @@ class InnerScreen extends StatelessWidget {
   }
 }
 
-class InProcessCard extends StatelessWidget {
-  const InProcessCard({
+class MovieRow extends StatelessWidget {
+
+  final bool progress;
+  final String title;
+
+  const MovieRow({
+    this.progress = false,
+    required this.title,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-
-      margin: EdgeInsets.all(5),
-      width: 120,
-      child: Column(
-        children: [
-          SizedBox(
-              height: 180,
-              child: Image.asset('assets/images/bg.png', fit: BoxFit.cover,)
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+          child: Text(title, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
+        ),
+        SizedBox(height: 15,),
+        // SingleChildScrollView(
+        //   physics: BouncingScrollPhysics(),
+        //   scrollDirection: Axis.horizontal,
+        //   child: Row(
+        //     children: [
+        //       SizedBox(width: 16,),
+        //       MovieTileRegular(),
+        //       MovieTileRegular(),
+        //       MovieTileRegular(),
+        //       MovieTileRegular(),
+        //       MovieTileRegular(),
+        //     ],
+        //   ),
+        // ),
+        Container(
+          constraints: BoxConstraints(
+            maxHeight: progress?240:200,
           ),
-          Stack(
-            children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(5, 10, 5, 5),
-                color: Color(0xff6644B8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(Icons.info_outline, color: Colors.white,),
-                    Icon(Icons.more_vert_outlined, color: Colors.white,)
-                  ],
-                ),
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    flex:67,
-                    child: Container(
-                      height: 5,
-                      color: Color(0XFFEE1520),
-                    ),
-                  ),
-                  Expanded(
-                    flex:100-67,
-                    child: Container(
-                      height: 5,
-                      color: Color(0X28969D9B),
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-        ],
-      ),
+          child: ListView.builder(
+            physics: BouncingScrollPhysics(),
+            shrinkWrap: false,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context,index){
+              if(index==0) {
+                return SizedBox(width: 16.0,);
+              } else {
+                return progress?MovieTileProgress():MovieTileRegular();
+              }
+          },
+          itemCount: 10+1,),
+        )
+      ],
     );
   }
 }
+
+
+
+
