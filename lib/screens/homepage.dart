@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movii/components/description_card.dart';
 import 'package:movii/components/icon_row.dart';
+import 'package:movii/components/promo_card.dart';
 import 'package:movii/global_widgets/custom_button.dart';
 import 'package:movii/global_widgets/custom_card.dart';
 import 'package:movii/global_widgets/custom_icon.dart';
@@ -36,17 +38,39 @@ class HomePage extends StatelessWidget {
                       fit: BoxFit.fill,
                     )),
                 Positioned(
-                    left: 40,
-                    top: height * 0.3,
-                    child: CustomIcon(
-                        icon: Icons.play_arrow_rounded,
-                        color: Colors.white.withOpacity(0.2))),
+                  left: 40,
+                  top: height * 0.3,
+                  child: CustomIcon(
+                      icon: Icons.play_arrow_rounded,
+                      color: Colors.white.withOpacity(0.2)),
+                ),
+                Positioned(
+                  top: 0,
+                  bottom: 0,
+                  child: Container(
+                    height: 400,
+                    width: width,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color(0xff17082A)
+                                .withRed(0)
+                                .withGreen(8)
+                                .withBlue(42)
+                                .withAlpha(0),
+                            Color(0xff17082A),
+                          ]),
+                    ),
+                  ),
+                ),
                 Positioned(
                     left: 40,
                     top: height * 0.38,
                     child: TitleText(
-                      title1: 'Title',
-                      title2: 'Goes Here',
+                      title1: 'Bohemian',
+                      title2: 'Rhapsody',
                     )),
                 Positioned(
                     left: 45,
@@ -106,12 +130,14 @@ class HomePage extends StatelessWidget {
               h4: 'Rus | En',
               t4: '',
             ),
+            PromoCard(),
+            DescriptionCard(),
             RatingStar(),
             Padding(
               padding: const EdgeInsets.only(top: 28.0, left: 20),
               child: Text('Similar Movies',
                   style: GoogleFonts.poppins(
-                      fontSize: 26,
+                      fontSize: 24,
                       color: Colors.white,
                       fontWeight: FontWeight.w700)),
             ),
