@@ -9,7 +9,7 @@ import 'package:movii/global_widgets/custom_card.dart';
 import 'package:movii/global_widgets/custom_icon.dart';
 import 'package:movii/global_widgets/custom_list_card.dart';
 import 'package:movii/global_widgets/custom_title_text.dart';
-import 'package:movii/global_widgets/movie_card.dart';
+import 'package:movii/global_widgets/movie_card_list.dart';
 import 'package:movii/global_widgets/rating_star.dart';
 import 'package:movii/global_widgets/small_text.dart';
 
@@ -141,7 +141,7 @@ class HomePage extends StatelessWidget {
                       color: Colors.white,
                       fontWeight: FontWeight.w700)),
             ),
-            MovieCard(),
+            MovieCardList(),
           ],
         ),
       ),
