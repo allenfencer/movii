@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movii/screens/bottom_sheet.dart';
 
 class CustomIcon extends StatelessWidget {
   final Color color;
@@ -8,7 +9,17 @@ class CustomIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        showModalBottomSheet(
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+            context: context,
+            builder: ( BuildContext context) {
+              return Bottom_Sheet();
+            },
+        );
+
+      },
       child: Container(
         clipBehavior: Clip.antiAlias,
         padding: EdgeInsets.all(5),
@@ -27,3 +38,4 @@ class CustomIcon extends StatelessWidget {
     );
   }
 }
+
