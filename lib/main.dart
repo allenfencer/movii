@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:movii/screens/sign_up_screen.dart';
 import 'screens/Search/searchScreen.dart';
 import 'screens/Home/innerScreen.dart';
+import 'screens/bottom_sheet.dart';
+import 'package:movii/screens/homepage.dart';
 
 void main() {
   runApp(
@@ -29,7 +31,7 @@ class _AppState extends State<App> {
   List<Widget> screenList = [
     InnerScreen(),
     SearchScreen(),
-    SearchScreen()
+    Container()
   ];
 
   @override

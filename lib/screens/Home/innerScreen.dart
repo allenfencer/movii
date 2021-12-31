@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movii/global_widgets/customButton.dart';
 import 'package:movii/global_widgets/custom_button.dart';
 
+import '../homepage.dart';
 import 'Components/movieTileProgress.dart';
 import 'Components/movieTileRegular.dart';
 
@@ -74,11 +75,19 @@ class InnerScreen extends StatelessWidget {
                                   ],
                                 ),
                                 ButtonMain(btnTxt: 'Play', color: Colors.white, foregroundColour: Colors.black, leading: true, leadingIcon: Icons.play_arrow,),
-                                Column(
-                                  children: [
-                                    Icon(Icons.info_outline, color: Colors.white,),
-                                    Text('Info', style: TextStyle(color: Colors.white),)
-                                  ],
+                                GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => HomePage()),
+                                    );
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Icon(Icons.info_outline, color: Colors.white,),
+                                      Text('Info', style: TextStyle(color: Colors.white),)
+                                    ],
+                                  ),
                                 ),
 
                               ],
