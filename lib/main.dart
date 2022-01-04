@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movii/screens/sign_up_screen.dart';
+import 'package:movii/screens/splash.dart';
 import 'screens/Search/searchScreen.dart';
 import 'screens/Home/innerScreen.dart';
 import 'screens/bottom_sheet.dart';
@@ -10,7 +11,7 @@ void main() {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignUp(),
+      home: Splash(),
     )
   );
 }

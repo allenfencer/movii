@@ -6,6 +6,7 @@ import 'package:movii/global_widgets/custom_button.dart';
 import 'package:movii/global_widgets/custom_title_text.dart';
 import 'package:movii/global_widgets/small_text.dart';
 import 'package:movii/screens/login_screen.dart';
+import 'package:movii/screens/otp_screen.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -99,7 +100,7 @@ class SignUp extends StatelessWidget {
                     btnText: 'Go',
                     onTap: () {
                       Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => LoginPage()));
+                          MaterialPageRoute(builder: (context) => OTPScreen()));
                     },
                   ),
                 ),
