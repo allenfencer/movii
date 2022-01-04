@@ -5,8 +5,8 @@ import 'package:movii/models/movie_data.dart';
 import 'movie_card.dart';
 
 class MovieCardList extends StatelessWidget {
-  final AnimationController? animationController;
-  const MovieCardList({Key? key, this.animationController}) : super(key: key);
+  final Axis? axisDirection;
+  const MovieCardList({Key? key, this.axisDirection}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +16,10 @@ class MovieCardList extends StatelessWidget {
           itemCount: Movie.movieList.length,
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          scrollDirection: Axis.vertical,
+          scrollDirection: axisDirection ?? Axis.vertical,
           itemBuilder: (BuildContext context, index) {
             return AnimationConfiguration.staggeredList(
-                duration: Duration(milliseconds: 800),
+                duration: Duration(milliseconds: 700),
                 position: index,
                 child: SlideAnimation(
                     verticalOffset: 300,

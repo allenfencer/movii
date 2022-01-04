@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:movii/global_widgets/customButton.dart';
 import 'package:movii/global_widgets/custom_button.dart';
 
@@ -218,22 +219,36 @@ class MovieRow extends StatelessWidget {
           constraints: BoxConstraints(
             maxHeight: progress ? 240 : 200,
           ),
-          child: ListView.builder(
-            physics: BouncingScrollPhysics(),
-            shrinkWrap: false,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              if (index == 0) {
-                return SizedBox(
-                  width: 16.0,
-                );
-              } else {
-                return progress
-                    ? Hero(tag: 'MovieScreen', child: MovieTileProgress())
-                    : Hero(tag: 'MovieScreen', child: MovieTileRegular());
-              }
-            },
-            itemCount: 10 + 1,
+          child: AnimationLimiter(
+            child: ListView.builder(
+              physics: BouncingScrollPhysics(),
+              shrinkWrap: false,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return SizedBox(
+                    width: 16.0,
+                  );
+                } else {
+                  return progress
+                      ? AnimationConfiguration.staggeredList(
+                          position: index,
+                          duration: Duration(milliseconds: 800),
+                          child: SlideAnimation(
+                              horizontalOffset: 200,
+                              child: MovieTileProgress()),
+                        )
+                      : AnimationConfiguration.staggeredList(
+                          position: index,
+                          duration: Duration(milliseconds: 800),
+                          child: SlideAnimation(
+                            horizontalOffset: 200,
+                            child: MovieTileRegular(),
+                          ));
+                }
+              },
+              itemCount: 10 + 1,
+            ),
           ),
         )
       ],
