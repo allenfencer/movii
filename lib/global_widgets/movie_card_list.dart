@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:movii/models/movie_data.dart';
 
 import 'movie_card.dart';
 
 class MovieCardList extends StatelessWidget {
-  const MovieCardList({Key? key}) : super(key: key);
+  final AnimationController? animationController;
+  const MovieCardList({Key? key, this.animationController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        padding: EdgeInsets.only(top: 15),
-        itemCount: Movie.movieList.length,
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        itemBuilder: (BuildContext context, index) {
-          return MovieCard(movieList: Movie.movieList, index: index);
-        });
+    return AnimationLimiter(
+      child: ListView.builder(
+          padding: EdgeInsets.only(top: 15),
+          itemCount: Movie.movieList.length,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          itemBuilder: (BuildContext context, index) {
+            return AnimationConfiguration.staggeredList(
+                duration: Duration(milliseconds: 800),
+                position: index,
+                child: SlideAnimation(
+                    verticalOffset: 300,
+                    child:
+                        MovieCard(movieList: Movie.movieList, index: index)));
+          }),
+    );
   }
 }
-
-

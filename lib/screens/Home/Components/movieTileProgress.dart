@@ -9,22 +9,23 @@ class MovieTileProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => HomePage()),
         );
       },
       child: Container(
-
         margin: EdgeInsets.all(5),
         width: 120,
         child: Column(
           children: [
             SizedBox(
                 height: 180,
-                child: Image.asset('assets/images/bg.png', fit: BoxFit.cover,)
-            ),
+                child: Image.asset(
+                  'assets/images/bg.png',
+                  fit: BoxFit.cover,
+                )),
             Stack(
               children: [
                 Container(
@@ -33,22 +34,28 @@ class MovieTileProgress extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.info_outline, color: Colors.white,),
-                      Icon(Icons.more_vert_outlined, color: Colors.white,)
+                      Icon(
+                        Icons.info_outline,
+                        color: Colors.white,
+                      ),
+                      Icon(
+                        Icons.more_vert_outlined,
+                        color: Colors.white,
+                      )
                     ],
                   ),
                 ),
                 Row(
                   children: [
                     Expanded(
-                      flex:67,
+                      flex: 67,
                       child: Container(
                         height: 5,
                         color: Color(0XFFEE1520),
                       ),
                     ),
                     Expanded(
-                      flex:100-67,
+                      flex: 100 - 67,
                       child: Container(
                         height: 5,
                         color: Color(0X28969D9B),
