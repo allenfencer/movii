@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:movii/models/movie_data.dart';
-
 import 'movie_card.dart';
 
 class MovieCardList extends StatelessWidget {
