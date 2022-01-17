@@ -3,12 +3,22 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movii/global_widgets/custom_button.dart';
 import 'package:movii/global_widgets/custom_title_text.dart';
 import 'package:movii/global_widgets/small_text.dart';
+import 'package:get/get.dart';
+import 'package:movii/models/apis/otp_model.dart';
+import 'package:movii/services/api_services.dart';
 
 import '../main.dart';
 
-class OTPScreen extends StatelessWidget {
-  const OTPScreen({ Key? key }) : super(key: key);
+class OTPScreen extends StatefulWidget {
+  final String? phoneNumber;
+  const OTPScreen({Key? key, this.phoneNumber}) : super(key: key);
 
+  @override
+  State<OTPScreen> createState() => _OTPScreenState();
+}
+
+class _OTPScreenState extends State<OTPScreen> {
+  TextEditingController otpController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +41,7 @@ class OTPScreen extends StatelessWidget {
                 ),
                 Center(
                   child: SmallText(
-                    text: 'Enter 6 digit OTP sent to\nyour mobile number.',
+                    text: 'Enter 4 digit OTP sent to\nyour mobile number.',
                     fontSize: 18,
                   ),
                 ),
@@ -41,6 +51,8 @@ class OTPScreen extends StatelessWidget {
                       BoxDecoration(borderRadius: BorderRadius.circular(15)),
                   clipBehavior: Clip.antiAlias,
                   child: TextField(
+                    controller: otpController,
+                    
                     keyboardType: TextInputType.number,
                     style: GoogleFonts.poppins(
                         fontSize: 16,
@@ -48,17 +60,17 @@ class OTPScreen extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         letterSpacing: 0.8),
                     decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 18),
-                        fillColor: Color(0xff848484).withOpacity(0.7),
-                        filled: true,
-                        border: InputBorder.none,
-                        prefixStyle: GoogleFonts.poppins(
-                            fontSize: 16,
-                            color: Colors.grey[300],
-                            fontWeight: FontWeight.w400,
-                            letterSpacing: 0.8),
-                        ),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 18),
+                      fillColor: Color(0xff848484).withOpacity(0.7),
+                      filled: true,
+                      border: InputBorder.none,
+                      prefixStyle: GoogleFonts.poppins(
+                          fontSize: 16,
+                          color: Colors.grey[300],
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0.8),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -68,8 +80,11 @@ class OTPScreen extends StatelessWidget {
                   child: CustomButton(
                     btnText: 'Go',
                     onTap: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => App()));
+                      OtpService fetchOtp = OtpService();
+                      fetchOtp
+                          .getOtp(
+                              widget.phoneNumber.toString(), otpController.text)
+                          .whenComplete(() => Get.to(() => App()));
                     },
                   ),
                 ),

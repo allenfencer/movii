@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movii/global_widgets/custom_button.dart';
 import 'package:movii/global_widgets/custom_title_text.dart';
 import 'package:movii/global_widgets/small_text.dart';
 import 'package:movii/main.dart';
 import 'package:movii/screens/otp_screen.dart';
+import 'package:movii/services/api_services.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController phoneNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +48,7 @@ class LoginPage extends StatelessWidget {
                       BoxDecoration(borderRadius: BorderRadius.circular(15)),
                   clipBehavior: Clip.antiAlias,
                   child: TextField(
+                    controller: phoneNumberController,
                     keyboardType: TextInputType.number,
                     style: GoogleFonts.poppins(
                         fontSize: 16,
@@ -67,8 +77,13 @@ class LoginPage extends StatelessWidget {
                   child: CustomButton(
                     btnText: 'Go',
                     onTap: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => OTPScreen()));
+                      print('user is trying to login');
+                      SignUpSevice loginUser = SignUpSevice();
+                      loginUser
+                          .loginUser(phoneNumberController.text)
+                          .whenComplete(() => Get.to(() => OTPScreen(
+                                phoneNumber: phoneNumberController.text,
+                              )));
                     },
                   ),
                 ),

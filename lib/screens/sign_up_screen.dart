@@ -1,16 +1,27 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movii/global_widgets/custom_button.dart';
 import 'package:movii/global_widgets/custom_title_text.dart';
 import 'package:movii/global_widgets/small_text.dart';
-import 'package:movii/screens/login_screen.dart';
+import 'package:movii/models/apis/otp_model.dart';
 import 'package:movii/screens/otp_screen.dart';
+import 'package:movii/services/api_services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController fullNameCOntroller = TextEditingController();
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +52,7 @@ class SignUp extends StatelessWidget {
                       BoxDecoration(borderRadius: BorderRadius.circular(15)),
                   clipBehavior: Clip.antiAlias,
                   child: TextField(
+                    controller: fullNameCOntroller,
                     keyboardType: TextInputType.name,
                     style: GoogleFonts.poppins(
                         fontSize: 16,
@@ -72,6 +84,7 @@ class SignUp extends StatelessWidget {
                       BoxDecoration(borderRadius: BorderRadius.circular(15)),
                   clipBehavior: Clip.antiAlias,
                   child: TextField(
+                    controller: phoneNumberController,
                     keyboardType: TextInputType.number,
                     style: GoogleFonts.poppins(
                         fontSize: 16,
@@ -99,8 +112,14 @@ class SignUp extends StatelessWidget {
                   child: CustomButton(
                     btnText: 'Go',
                     onTap: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => OTPScreen()));
+                      debugPrint('signing in user');
+                      SignUpSevice postRequest = SignUpSevice();
+                      postRequest
+                          .postUserData(phoneNumberController.text,
+                              fullNameCOntroller.text)
+                          .whenComplete(() => Get.to(() => OTPScreen(
+                                phoneNumber: phoneNumberController.text,
+                              )));
                     },
                   ),
                 ),
