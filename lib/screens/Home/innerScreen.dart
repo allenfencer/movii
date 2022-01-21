@@ -2,12 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:movii/global_widgets/customButton.dart';
 import 'package:movii/global_widgets/custom_button.dart';
+import 'package:movii/screens/splash.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../homepage.dart';
 import 'Components/movieTileProgress.dart';
 import 'Components/movieTileRegular.dart';
 
 class InnerScreen extends StatelessWidget {
+  const InnerScreen({Key? key}) : super(key: key);
+
+  void clearStoredData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('refresh');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,20 +131,21 @@ class InnerScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
+                              clearStoredData();
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomePage()),
+                                    builder: (context) => Splash()),
                               );
                             },
                             child: Column(
                               children: [
                                 Icon(
-                                  Icons.info_outline,
+                                  Icons.login,
                                   color: Colors.white,
                                 ),
                                 Text(
-                                  'Info',
+                                  'Logout',
                                   style: TextStyle(color: Colors.white),
                                 )
                               ],

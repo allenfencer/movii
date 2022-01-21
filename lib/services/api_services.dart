@@ -20,7 +20,7 @@ class SignUpSevice {
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
-      return registrationFromJson(request.body);
+      return registrationFromJson(await response.stream.bytesToString());
     } else {
       print(response.reasonPhrase);
       throw Exception('Could not send data to the server');
@@ -38,33 +38,31 @@ class SignUpSevice {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.first);
       print(await response.stream.bytesToString());
-      return loginFromJson(request.body);
+      return loginFromJson(await response.stream.bytesToString());
     } else {
       print(response.reasonPhrase);
       throw Exception('Failed to login user data');
     }
   }
 
-  Future<Token> postRefreshToken() async {
+  Future<Token> checkValidity(String refreshToken) async {
+    String urlName = '/movies/token-refresh/';
+
     var headers = {'Content-Type': 'application/json'};
-    var request = http.Request(
-        'POST', Uri.parse('http://127.0.0.1:8000/api/token-refresh/'));
-    request.body = json.encode({
-      "refresh":
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTU3NTE5Mjk5MiwianRpIjoiM2JhMTM5ZjJjOTM3NDJhYzk0NTNmMDg4NTRlZThkYTMiLCJ1c2VyX2lkIjo0fQ.JNhkbVREAeboNTlcGB7u-2plF0Cd97eyUymFgVqSHh0tampered"
-    });
+    var request = http.Request('POST', Uri.parse(baseUrl + urlName));
+    request.body = json.encode({"refresh": refreshToken});
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
+      print('checking validity');
       print(await response.stream.bytesToString());
-      return tokenFromJson(request.body);
+      return tokenFromJson(await response.stream.bytesToString());
     } else {
       print(response.reasonPhrase);
-      throw Exception('CAnnot get tokens at the moment');
+      throw Exception('Cannot get tokens at the moment');
     }
   }
 }
@@ -79,8 +77,8 @@ class OtpService {
 
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-      return otpFromJson(request.body);
+      // print(await response.stream.bytesToString());
+      return otpFromJson(await response.stream.bytesToString());
     } else {
       print(response.reasonPhrase);
       throw Exception('Could not send data');

@@ -6,6 +6,7 @@ import 'package:movii/global_widgets/small_text.dart';
 import 'package:get/get.dart';
 import 'package:movii/models/apis/otp_model.dart';
 import 'package:movii/services/api_services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
 
@@ -19,6 +20,15 @@ class OTPScreen extends StatefulWidget {
 
 class _OTPScreenState extends State<OTPScreen> {
   TextEditingController otpController = TextEditingController();
+  late String refreshToken;
+  late String accessToken;
+  String? rtFromSharedPref;
+
+  void storeRefresh(String rt) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('refresh', rt);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +62,6 @@ class _OTPScreenState extends State<OTPScreen> {
                   clipBehavior: Clip.antiAlias,
                   child: TextField(
                     controller: otpController,
-                    
                     keyboardType: TextInputType.number,
                     style: GoogleFonts.poppins(
                         fontSize: 16,
@@ -79,12 +88,20 @@ class _OTPScreenState extends State<OTPScreen> {
                 Center(
                   child: CustomButton(
                     btnText: 'Go',
-                    onTap: () {
+                    onTap: () async {
+                      setState(() {});
                       OtpService fetchOtp = OtpService();
-                      fetchOtp
-                          .getOtp(
-                              widget.phoneNumber.toString(), otpController.text)
-                          .whenComplete(() => Get.to(() => App()));
+                      Otp token = Otp();
+                      SignUpSevice refreshValidity = SignUpSevice();
+                      token = await fetchOtp.getOtp(
+                          widget.phoneNumber.toString(), otpController.text);
+                      refreshToken = token.response!.refresh.toString();
+                      accessToken = token.response!.access.toString();
+                      storeRefresh(refreshToken);
+                      refreshValidity.checkValidity(refreshToken);
+                      Get.to(() => App(
+                            refreshToken: refreshToken,
+                          ));
                     },
                   ),
                 ),
